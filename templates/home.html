@@ -1,0 +1,96 @@
+{% extends 'layout.html' %}
+{% block title %} {{title}} {% endblock %}
+{% block content %}
+
+<div class="col-12 mx-auto ">
+    <div class="col-9 mx-auto mt-3 c">
+        <h1 class="titulo3">Cosas a Guardar</h1>
+    </div>
+</div>
+
+<hr>
+
+<div class="col-7 mx-auto ">
+    <div class="col-11 mx-auto mt-5 mb-5">
+        <h3 class="c">Contenedores</h3>
+    </div>
+    
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID#</th>
+                <th scope="col">indice</th>
+                <th scope="col">Numero</th>
+                <th scope="col">Contenedor</th>
+                <th scope="col">ID_Estante</th>
+                <th scope="col">ID_Localidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for container in containers %}
+            <tr>
+                <th scope="row">{{ container.id }}</th>
+                <td>{{ container.indice }}</td>
+                <td>{{ container.numero }}</td>
+                <td>{{ container.contenedor }}</td>
+                <td>{{ container.id_shelf }}</td>
+                <td>{{ container.id_location }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="col-11 mx-auto mt-5 mb-5">
+        <h3 class="c">Estantes</h3>
+    </div>
+
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID#</th>
+                <th scope="col">Entrepaño</th>
+                <th scope="col">Estante</th>
+                <th scope="col">ID_Localidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for shelf in shelfs %}
+            <tr>
+                <th scope="row">{{ shelf.id }}</th>
+                <td>{{ shelf.entrepano }}</td>
+                <td>{{ shelf.estante }}</td>
+                <td>{{ shelf.id_location }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="col-11 mx-auto mt-5 mb-5">
+        <h3 class="c">Localidades</h3>
+    </div>
+    
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID#</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Lugar</th>
+                <th scope="col">Nivel</th>
+                <th scope="col">Espacio</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for local in locations %}
+            <tr>
+                <th scope="row">{{ local.id }}</th>
+                <td>{{ local.direccion }}</td>
+                <td>{{ local.lugar }}</td>
+                <td>{{ local.nivel }}</td>
+                <td>{{ local.espacio }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

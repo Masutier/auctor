@@ -1,0 +1,204 @@
+{% extends 'layout.html' %}
+{% block title %} {{title}} {% endblock %}
+{% block content %}
+
+<div class="col-12 mx-auto ">
+    <div class="col-9 mx-auto mt-3 c">
+        <h1 class="titulo3">Cosas a Guardar</h1>
+    </div>
+</div>
+
+<hr>
+
+<div class="col-11 mx-auto mt-5 mb-5">
+    <h1 class="titulo3 c">Nuevo Articulo</h1>
+    <div class="row">
+        <div class="col-8 mx-auto ">
+            <div class="col-11 mx-auto p-5 backform">
+
+                <form action="/createArticle" method="POST">
+
+                    <h3 class="titulo3 mb-3 c">Articulo</h3>
+
+                    <div class="row ">
+                        <div class="col-lg-4 col-sm-10 mb-4 mx-auto">
+                            <select class="form-select" name="type" id="type" aria-label="Default select">
+                                <option selected value="electronic">Eléctronicos</option>
+                                <option value="computer">Computadores</option>
+                                <option value="medicin">Medicamentos</option>
+                                <option value="documents">Documentos</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+
+                        <div class="col-lg-4 col-sm-10 mx-auto">
+                            <div class="mb-4">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Nombre">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7 col-sm-10 mx-auto">
+                        <div class="mb-4">
+                            <input type="text" class="form-control" id="description" name="description" placeholder="Descripción">
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="shelf">Contenedor</label>
+                        <select class="form-select" id="contenedor" name="contenedor">
+                            <option selected>Choose...</option>
+                            {% for container in containers %}
+                                <option value="{{ container.id }}">ID: {{ container.id }}, Indice: {{ container.indice }}, Numero: {{ container.numero }}, Contenedor: {{ container.contenedor }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="shelf">Estante</label>
+                        <select class="form-select" id="shelf" name="shelf">
+                            <option selected>Choose...</option>
+                            {% for shelf in shelfs %}
+                                <option value="{{ shelf.id }}">ID: {{ shelf.id }}, Estante: {{ shelf.estante }}, Emtrepaño: {{ shelf.entrepano }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="location">Localización</label>
+                        <select class="form-select" id="location" name="location">
+                            <option selected>Choose...</option>
+                            {% for local in locations %}
+                                <option value="{{ local.id }}">ID: {{ local.id }}, Dirección: {{ local.direccion }}, Lugar: {{ local.lugar }}, Nivel: {{ local.nivel }}, Espacio: {{ local.espacio }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-lg-7 col-sm-10 mx-auto d-grid gap-2 mt-4">
+                        <input class="btn btn-primary" type="submit" value="CREAR CONTENEDOR">
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+        <div class="col-4 mx-auto ">
+            <div class="col-11 mx-auto mt-5 mb-5">
+                <h3 class="c">Otros Articulos</h3>
+            </div>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID#</th>
+                        <th scope="col">indice</th>
+                        <th scope="col">Lugar</th>
+                        <th scope="col">Nivel</th>
+
+                        <th scope="col">ID_Contenedor</th>
+                        <th scope="col">ID_Estante</th>
+                        <th scope="col">ID_Localidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for article in articles %}
+                    <tr>
+                        <th scope="row">{{ article.id }}</th>
+                        <td>{{ article.indice }}</td>
+                        <td>{{ article.numero }}</td>
+                        <td>{{ article.contenedor }}</td>
+
+                        <td>{{ article.id_container }}</td>
+                        <td>{{ article.id_shelf }}</td>
+                        <td>{{ article.id_location }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="col-11 mx-auto mt-5 mb-5">
+                <h3 class="c">Otros Contenedores</h3>
+            </div>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID#</th>
+                        <th scope="col">indice</th>
+                        <th scope="col">Lugar</th>
+                        <th scope="col">Nivel</th>
+                        <th scope="col">ID_Estante</th>
+                        <th scope="col">ID_Localidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for container in containers %}
+                    <tr>
+                        <th scope="row">{{ container.id }}</th>
+                        <td>{{ container.indice }}</td>
+                        <td>{{ container.numero }}</td>
+                        <td>{{ container.contenedor }}</td>
+                        <td>{{ container.id_shelf }}</td>
+                        <td>{{ container.id_location }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="col-11 mx-auto mt-5 mb-5">
+                <h3 class="c">Otros Estantes</h3>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID#</th>
+                        <th scope="col">Entrepaño</th>
+                        <th scope="col">Estante</th>
+                        <th scope="col">ID_Localidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for shelf in shelfs %}
+                    <tr>
+                        <th scope="row">{{ shelf.id }}</th>
+                        <td>{{ shelf.entrepano }}</td>
+                        <td>{{ shelf.estante }}</td>
+                        <td>{{ shelf.id_location }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="col-11 mx-auto mt-5 mb-5">
+                <h3 class="c">Otras Localidades</h3>
+            </div>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID#</th>
+                        <th scope="col">Direccion</th>
+                        <th scope="col">Lugar</th>
+                        <th scope="col">Nivel</th>
+                        <th scope="col">Espacio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for local in locations %}
+                    <tr>
+                        <th scope="row">{{ local.id }}</th>
+                        <td>{{ local.direccion }}</td>
+                        <td>{{ local.lugar }}</td>
+                        <td>{{ local.nivel }}</td>
+                        <td>{{ local.espacio }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

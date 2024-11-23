@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+{% block title %} {{title}} {% endblock %}
+{% block content %}
+
+<div class="col-12 mx-auto ">
+    <div class="col-9 mx-auto mt-3 c">
+        <h1 class="titulo3">Cosas a Guardar</h1>
+    </div>
+</div>
+
+<hr>
+
+<div class="col-11 mx-auto mt-5 mb-5">
+    <h1 class="titulo3 c">Nuevo Contenedor</h1>
+    <div class="row">
+        <div class="col-9 mx-auto ">
+            <div class="col-11 mx-auto p-5 backform">
+
+                <form action="/createShelf" method="POST">
+
+                    <h3 class="titulo3 mb-3 c">Estanteria</h3>
+
+                    <div class="row mb-3">
+                        <div class="col-lg-6 col-sm-10 mx-auto">
+                            <div class="mb-4">
+                                <input type="text" class="form-control" id="estante" name="estante" placeholder="Estante">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-10 mx-auto">
+                            <div class="mb-4">
+                                <input type="text" class="form-control" id="entrepano" name="entrepano" placeholder="Entrepaño">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="location">Localización</label>
+                        <select class="form-select" id="location" name="location">
+                            <option selected>Choose...</option>
+                            {% for local in locations %}
+                                <option value="{{ local.id }}">{{ local.id }}, {{ local.direccion }}, {{ local.lugar }}, {{ local.nivel }}, {{ local.espacio }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-lg-7 col-sm-10 mx-auto d-grid gap-2 mt-4">
+                        <input class="btn btn-primary" type="submit" value="CREAR ESTANTE">
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+        <div class="col-3 mx-auto ">
+            <div class="col-11 mx-auto mb-5">
+                <h3 class="c">Otros Estantes</h3>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID#</th>
+                        <th scope="col">Entrepaño</th>
+                        <th scope="col">Estante</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for shelf in shelfs %}
+                    <tr>
+                        <th scope="row">{{ shelf.id }}</th>
+                        <td>{{ shelf.entrepano }}</td>
+                        <td>{{ shelf.estante }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,108 @@
+{% extends 'layout.html' %}
+{% block title %} {{title}} {% endblock %}
+{% block content %}
+
+<div class="col-12 mx-auto ">
+    <div class="col-9 mx-auto mt-3 c">
+        <h1 class="titulo3">Cosas a Guardar</h1>
+    </div>
+</div>
+
+<hr>
+
+<div class="col-11 mx-auto mt-5 mb-5">
+    <h1 class="titulo3 c">Nuevo Contenedor</h1>
+    <div class="row">
+        <div class="col-8 mx-auto ">
+            <div class="col-11 mx-auto p-5 backform">
+
+                <form action="/createLocation" method="POST">
+
+                    <h3 class="titulo3 mb-3 c">Localización</h3>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-10 mx-auto">
+                            <div class="mb-4">
+                                <input type="text" class="form-control" id="espacio" name="espacio" placeholder="Espacio">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-10 mx-auto">
+                            <div class="mb-4">
+                                <input type="text" class="form-control" id="nivel" name="nivel" placeholder="Piso No. o Nivel">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-sm-10 mb-4 mx-auto">
+                        <select class="form-select" name="lugar" id="lugar" aria-label="Default select">
+                            <option selected>Lugar</option>
+                            <option value="casa">Casa</option>
+                            <option value="apartamento">Apartamento</option>
+                            <option value="bodega">Bodega</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+
+                    <div class="col-lg-6 col-sm-10 mb-4 mx-auto">
+                        <div class="mb-4">
+                            <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Dirección">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-10 mb-4 mx-auto">
+                            <div class="mb-4">
+                                <input type="text" class="form-control" id="ciudad" name="ciudad" placeholder="Ciudad" default="Bogotá">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-10 mb-4 mx-auto">
+                            <div class="mb-4">
+                                <input type="text" class="form-control" id="depto" name="depto" placeholder="Depto" default="Bogotá D.C.">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7 col-sm-10 mx-auto d-grid gap-2 mt-4">
+                        <input class="btn btn-primary" type="submit" value="CREAR LOCALIZACION">
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+        <div class="col-4 mx-auto ">
+            <div class="col-11 mx-auto mb-5">
+                <h3 class="c">Otras Localidades</h3>
+            </div>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID#</th>
+                        <th scope="col">Direccion</th>
+                        <th scope="col">Lugar</th>
+                        <th scope="col">Nivel</th>
+                        <th scope="col">Espacio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for local in locations %}
+                    <tr>
+                        <th scope="row">{{ local.id }}</th>
+                        <td>{{ local.direccion }}</td>
+                        <td>{{ local.lugar }}</td>
+                        <td>{{ local.nivel }}</td>
+                        <td>{{ local.espacio }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
